@@ -1,5 +1,6 @@
 # [MicroMasters-MITx-DEDP](https://micromasters.mit.edu/dashboard/)
-###### I enrolled in 2/6 courses for the MicroMasters MITx DEDP Program 2/4/2020, duration is 11 weeks
+## I enrolled in 2/6 courses for the MicroMasters MITx DEDP Program
+## Duration: 2/4/2020 - 4/21/2020 (11weeks)
 ###### Data Analysis for Social Scientists MITx - 14.310x - CORE
 ###### Foundations of Development Policy MITx - 14.740x - ELECTIVE
 ###### This repo is to practice and to store stuff 
