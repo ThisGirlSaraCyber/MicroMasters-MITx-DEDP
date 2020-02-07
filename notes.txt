@@ -1,5 +1,0 @@
-git checkout master # switch back to the master branch
-git fetch upstream # update information about the remote
-git merge upstream/master # merge the changes referred to by upstream/master 
-git status # will tell you that your local master is ahead of your master at origin
-git push origin master # Push your changes to master
