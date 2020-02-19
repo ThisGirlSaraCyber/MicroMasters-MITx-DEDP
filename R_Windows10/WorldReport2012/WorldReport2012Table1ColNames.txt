@@ -1,0 +1,13 @@
+RowID	
+Country	Population_millions_2010	
+Population_AvgAnnualPctGrowth_2000-2010	
+Population_DensityPeoplePerSqkm_2009	
+PopulationAgeCompPct_Ages0-14_2010	
+GNI_$Billions_2010	
+GNI_$PerCapita_2010	
+PPPGNI_$Billions_2010	
+PPPGNI_$PerCapita_2010	
+GrossDMSTCPrdct_PerCapitaPctGrowth_2009-2010	
+LifeExpectancyAtBirth_Male_2009	
+LifeExpectancyAtBirth_Female_2009	
+AdultLiteracyRate_PctAges15AndOlder_2005-2009
