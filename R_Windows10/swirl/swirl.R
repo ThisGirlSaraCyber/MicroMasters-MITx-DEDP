@@ -348,9 +348,70 @@ paste(LETTERS, 1:4, sep = "-")
 ######################################
 # 6: Missing Values           
 ######################################
+
+# In R, NA is used to represent any value that is 'not available' or 'missing' (in the statistical sense)
+# In this lesson, we'll explore missing values further
+# Any operation involving NA generally yields NA as the result
+x <- c(44, NA, 5, NA)
+# Now, let's multiply x by 3 (this shows that 3 does not effect NA)
+x*3
+# [1] 132  NA  15  NA
+# lets create a vector containing 1000 draws from a standard normal distribution with:
+y <- rnorm(1000)
+# Next, let's create a vector containing 1000 NAs with 
+z <- rep(NA, 1000)
+# Finally, let's select 100 elements at random from these 2000 values (combining y and z) such that we don't 
+# know how many NAs we'll wind up with or what positions they'll occupy in our final vector -- 
+my_data <- sample(c(y, z), 100)
+
+
+# Let's first ask the question of where our NAs are located in our data
+# The is.na() function tells us whether each element of a vector is NA
+# Call is.na() on my_data and assign the result to my_na
+my_na <- is.na(my_data)
+# BTW logical operators, the `==` operator as a method of testing for equality between two objects might think the expression 
+my_data == NA 
+# yields the same results as is.na()
+
+
+# Call the sum() function on my_na to count the total number of TRUEs in my_na, and thus the total number of NAs
+sum(my_na)
+
+
+# a second type of missing value -- NaN, which stands for 'not a number'
+# To generate NaN, try dividing (using a forward slash) 0 by 0 now
+0/0
+
+
+# In R, Inf stands for infinity
+# What happens if you subtract Inf from Inf?
+Inf - Inf 
+
+
 ######################################
 # 7: Subsetting Vectors       
 ######################################
+
+# In this lesson, we'll see how to extract elements from a vector based on some conditions that we specify
+# For example, we may only be interested in the first 20 elements of a vector, or only the elements that are not NA, 
+# or only those that are positive or correspond to a specific variable of interest
+
+
+# x from #6 is used 
+# For a simple example, try x[1:10] to view the first ten elements of x.
+x[1:10]
+
+
+# Index vectors come in four different flavors -- 
+# 1- logical vectors, 
+# 2 - vectors of positive integers, 
+# 3 - vectors of negative integers,
+# 4 - vectors of character strings 
+
+
+
+
+
 ######################################
 # 8: Matrices and Data Frames 
 ######################################
