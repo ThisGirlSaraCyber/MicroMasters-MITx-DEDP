@@ -1,14 +1,17 @@
 #################################################################################################
-                            #Start
+# Start
 #################################################################################################
-# Updated: 02/19/2020 ~00
+
+
+# Updated: 04/05/2020 
 # Notes: 
-# - re-do this exercise to better familiarize with R each time
+# [1] re-do this exercise to better familiarize with R each time
 
 
 #################################################################################################
-                              #Environment
+# Environment
 #################################################################################################
+
 
 # clear up environment
 ls()
@@ -16,16 +19,18 @@ rm(list = ls())
 
 
 #################################################################################################
-                              #Library
+# Library
 #################################################################################################
+
 
 # set the library with the packages we use
 library(swirl)
 
 
 #################################################################################################
-                              #Course
+# Course
 #################################################################################################
+
 
 # install the course
 # 14.740x uses the same swirl course as 14.310x
@@ -34,8 +39,9 @@ install_course_zip("swirl/14_740x_Advanced_R.zip", multi = FALSE)
 
 
 #################################################################################################
-                              #Swirl
+# Swirl
 #################################################################################################
+
 
 # run swirl
 swirl()
@@ -68,8 +74,9 @@ nxt()
 
 
 #################################################################################################
-                              # 14 310x Intro to R
+# 14 310x Intro to R
 #################################################################################################
+
 
 ######################################
 # 1: Welcome  
@@ -409,18 +416,288 @@ x[1:10]
 # 4 - vectors of character strings 
 
 
+# Recall that `!` gives us the negation of a logical expression, so !is.na(x) can be read as 'is not NA'. 
+# Therefore, if we want to create a vector
+# called y that contains all of the non-NA values from x, we can use y <- x[!is.na(x)]. Give it a try.
+y <- x[!is.na(x)]
 
+
+# Subset the 3rd, 5th, and 7th elements of x? Hint -- Use the c() function to specify the element numbers as a numeric vector
+x[c(3,5,7)]
+
+
+# It's important that when using integer vectors to subset our vector x, we stick with the set of indexes {1, 2, ..., 40} since x only has 40 elements. 
+# What happens if we ask for the zeroth element of x (i.e. x[0])? Give it a try.
+x[0]
+# What if we ask for the 3000th element of x?
+x[3000]
+# Again, nothing useful, but R doesn't prevent us from asking for it. This should be a cautionary tale. 
+# You should always make sure that what you are asking for is within the bounds of the vector you're working with.
+
+
+# What if we're interested in all elements of x EXCEPT the 2nd and 10th? 
+# It would be pretty tedious to construct a vector containing all numbers 1 through 40 EXCEPT 2 and 10.
+# Luckily, R accepts negative integer indexes. 
+# Whereas x[c(2, 10)] gives us ONLY the 2nd and 10th elements of x, x[c(-2, -10)] gives us all elements of x EXCEPT for the 2nd and 10 elements
+x[c(-2,-10)]
+# OR
+x[-c(2,10)]
+
+
+# Create a numeric vector with three named elements using:
+vect <- c(foo = 11, bar = 2, norf = NA)
+# We can also get the names of vect by passing vect as an argument to the names() function
+names(vect)
+# Alternatively, we can create an unnamed vector vect2 with c(11, 2, NA). Do that now.
+vect2 <- c(11,2,NA)
+# Then, we can add the `names` attribute to vect2 after the fact with names(vect2) <- c("foo", "bar", "norf")
+names(vect2) <- c("foo", "bar", "norf")
+# Now, let's check that vect and vect2 are the same by passing them as arguments to the identical() function.
+identical(vect, vect2)
+# Which of the following commands do you think would give us the second element of vect?
+vect["bar"]
+# Likewise, we can specify a vector of names with vect[c("foo", "bar")]. Try it out.
+vect[c("foo", "bar")]
 
 
 ######################################
 # 8: Matrices and Data Frames 
 ######################################
+
+
+# In this lesson, we'll cover matrices and data frames. 
+# Both represent 'rectangular' data types, meaning that they are used to store tabular data, with rows and columns
+# The main difference: 
+# [1]matrices can only contain a single class of data
+# [2]data frames can consist of many different classes of data
+
+
+# Create a vector containing the numbers 1 through 20 using the `:` operator. Store the result in a variable called my_vector
+my_vector <- 1:20
+dim(my_vector)
+length(my_vector)
+dim(my_vector) <- c(4,5)
+attributes(my_vector)
+class(my_vector)
+# The example that we've used so far was meant to illustrate the point that a matrix is simply an atomic vector with a dimension attribute
+# A more direct method of creating the same matrix uses the matrix() function
+
+
+# Bring up the help file for the matrix() function now using the `?` function
+?matrix
+# Create a matrix containing the same numbers (1-20) and dimensions (4 rows, 5 columns) by calling the matrix() function
+# Store the result in a variable called my_matrix2
+my_matrix2 <- matrix(1:20, nrow = 4, ncol = 5)
+identical(my_matrix, my_matrix2)
+
+
+# Imagine that the numbers in our table represent some measurements from a clinical experiment, 
+# where each row represents one patient and each column represents one variable for which measurements were taken
+patients <- c("Bill", "Gina", "Kelly", "Sean")
+# Use the cbind() function to 'combine columns' call cbind() with two arguments -- the patients vector and my_matrix
+cbind(patients, my_matrix)
+# How to include the names of our patients in the table without destroying the integrity of our numeric data
+# Try the following:
+my_data <- data.frame(patients, my_matrix)
+class(my_data)
+cnames <- c("patient", "age", "weight", "bp", "rating", "test")
+colnames(my_data) <- cnames
+
+
 ######################################
 # 9: Looking at Data     
 ######################################
+
+
+# Whenever you're working with a new dataset, the first thing you should do is look at it!
+# What is the format of the data?
+# What are the dimensions? What are the variable names? How are the variables stored? 
+# Are there missing data?
+# Are there any flaws in the data?
+
+
+# This lesson will teach you how to answer these questions and more using R's built-in functions
+# Dataset constructed from the United States Department of Agriculture's PLANTS Database (http://plants.usda.gov/adv_search.html)
+
+
+class(plants)
+
+
+# Since the dataset is stored in a data frame, we know it is rectangular
+# In other words, it has two dimensions (rows and columns) and fits neatly into a table or spreadsheet
+# Use this to find out:
+dim(plants)
+# The first number you see (5166) is the number of rows (observations) and the second number (10) is the number of columns (variables)
+# View the number of rows(observations)
+nrow(plants)
+# View the number of columns(variables)
+ncol(plants)
+
+
+# If you are curious as to how much space the dataset is occupying in memory, you can use:
+object.size(plants)
+
+
+# We have shape and size, get a feel for what is inside
+names(plants)
+# Take a look inside 
+head(plants, 10)
+tail(plants, 15)
+# After previewing the top and bottom of the data, you probably noticed lots of NAs, which are R's placeholders for missing values
+# Use this to get a better feel for how each variable is distributed and how much of the dataset is missing:
+summary(plants)
+# summary() provides different output for each variable, depending on its class
+# For numeric data such as Precip_Min, summary() displays the minimum, 1st quartile, median, mean, 3rd quartile, and maximum
+# These values help us understand how the data are distributed
+# For categorical variables (called 'factor' variables in R), summary() displays the number of times each value (or 'level') occurs
+# For example, each value of Scientific_Name only appears once, since it is unique to a specific plant
+# In contrast, the summary for Duration (also a factor variable) tells us that our dataset contains:
+# 3031 Perennial plants, 682 Annual plants, etc
+
+
+# R truncated the summary for Active_Growth_Period by including a catch-all category called 'Other'
+# Since it is a categorical/factor variable, we can see how many times each value actually occurs in the data with:
+table(plants$Active_Growth_Period)
+
+
+str(plants)
+# The beauty of str() is that it combines many of the features of the other functions you've already seen, all in a concise and readable format
+# At the very top, it tells us that the class of plants is 'data.frame' and that it has 5166 observations and 10 variables
+# It then gives us the name and class of each variable, as well as a preview of its contents
+
+
 ######################################
 # 10: Base Graphics           
 ######################################
+
+
+# One of the greatest strengths of R, relative to other programming languages, is the ease with which we can create publication-quality graphics
+# In this lesson, you'll learn about base graphics in R
+# We do not cover the more advanced portions of graphics in R in this lesson. These include lattice, ggplot2 and ggvis
+
+
+# There is a school of thought that this approach is backwards, that we should teach ggplot2 first
+# See http://varianceexplained.org/r/teach_ggplot2_to_beginners/ for an outline of this view
+
+
+# Reel er in
+data(cars)
+
+
+# Check out the help page
+?cars
+# As you can see in the help page, the cars data set has only two variables: speed and stopping distance
+# Note that the data is from the 1920s
+
+
+# Run head() function to run the top 6 results 
+head(cars)
+
+
+# Before plotting, it is always a good idea to get a sense of the data
+# Key R commands for doing so include, dim(), names(), head(), tail() and summary()
+
+
+# Okay, run plot
+plot(cars)
+# As always, R tries very hard to give you something sensible given the information that you have provided to it
+# First, R notes that the data frame you have given it has just two columns, so it assumes that you want to plot one column versus the other
+# Second, since we do not provide labels for either axis, R uses the names of the columns
+# Third, it creates axis tick marks at nice round numbers and labels them accordingly
+# Fourth, it uses the other defaults supplied in plot()
+# and take into consideration - plot is short for scatterplot
+
+
+?plot
+# The help page for plot() highlights the different arguments that the function can take
+# The two most important are x and y, 
+# the variables that will be plotted
+
+
+# For the next set of questions, include the argument names in your answers
+# That is, do not type plot(cars$speed, cars$dist), although that will work. 
+# Instead, use: 
+plot(x = cars$speed, y = cars$dist)
+# Note that this produces a slightly different answer than plot(cars)
+# In this case, R is not sure what you want to use as the labels on the axes, 
+# so it just uses the arguments which you pass in, data frame name and dollar signs included
+# Note that there are other ways to call the plot command, i.e., using the "formula" interface
+# For example, we get a similar plot to the above with 
+plot(dist ~ speed, cars)
+# However, we will wait till later in the lesson before using the formula interface
+# Use plot() command to show dist on the x-axis and speed on the y-axis from the cars data frame
+# This is the opposite of what we did above
+plot(x = cars$dist, y = cars$speed)
+
+
+# Assign accordingly
+
+
+# Assign Speed as the xLabel
+plot(x = cars$speed, y = cars$dist, xlab = "Speed", ylab = "Stopping Distance")
+plot(cars, main = "My Plot")
+plot(cars, sub = "My Plot Subtitle")
+
+# Plot the data points in cars as red
+plot(cars, col = 2)
+
+
+# Plot cars while limiting the x-axis to 10 through 15 (Use xlim = c(10, 15) to achieve this effect.)
+plot(cars, xlim = c(10, 15))
+
+
+# You can also change the shape of the symbols in the plot
+# The help page for points (?points) provides the details
+?points
+
+
+# Plot cars using triangles. (Use pch = 2 to achieve this effect.)
+plot(cars, pch = 2)
+
+
+# Reel er in 
+data(mtcars)
+
+
+# Anytime that you load up a new data frame, you should explore it before using it
+# In the middle of a swirl lesson, just type play()
+# This temporarily suspends the lesson (without losing the work you have already done) and allows you to issue commands like:
+# dim(mtcars) and head(mtcars)
+# Once you are done examining the data, just type nxt() and the lesson will pick up where it left off
+
+
+# Type ?boxplot or help(boxplot) to view a help page with details about boxplot
+?boxplot
+# boxplot(), like many R functions, also takes a "formula" argument, generally an expression with a tilde ("~") which indicates the relationship between the input variables
+# This allows you to enter something like mpg ~ cyl to plot the relationship between cyl (number of cylinders) on the x-axis and mpg (miles per gallon) on the y-axis
+# Use boxplot() with formula = mpg ~ cyl and data = mtcars to create a box plot
+boxplot(formula = mpg ~ cyl, data = mtcars)
+# The plot shows that mpg is much lower for cars with more cylinders
+# Note that we can use the same set of arguments that we explored with plot() above to add axis labels, titles and so on
+
+
+# When looking at a single variable, histograms are a useful tool
+# hist() is the associated R function
+# Like plot(), hist() is best used by just passing in a single vector
+hist(mtcars$mpg)
+
+
+# In this lesson, you learned how to work with base graphics in R
+# The best place to go from here is to study the ggplot2 package
+# If you want to explore other elements of base graphics, then this web page (http://www.ling.upenn.edu/~joseff/rstudy/week4.html)
+
+
+# Any operation involving NA generally yields NA as the result
+# To illustrate, let's create a vector c(44, NA, 5, NA) and assign it to a variable x
+x <- c(44,NA,5,NA)
+# multiply x by 3
+x*3
+# [1] 132  NA  15  NA
+
+
+
+
+
 ######################################
 # 11: Manipulating Data with dplyr
 ######################################
@@ -433,8 +710,9 @@ x[1:10]
 
 
 #################################################################################################
-                              # 14 310x Advanced R
+# 14 310x Advanced R
 #################################################################################################
+
 
 ######################################
 # 1: Welcome        
@@ -493,5 +771,5 @@ x[1:10]
 
 
 #################################################################################################
-                            #End
+# End
 #################################################################################################

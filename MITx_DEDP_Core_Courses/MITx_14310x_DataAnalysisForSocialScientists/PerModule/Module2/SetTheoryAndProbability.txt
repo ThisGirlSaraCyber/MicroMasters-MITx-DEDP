@@ -1,0 +1,97 @@
+OK, so let's get started.
+I'm going to start with a few definitions.
+So, a sample space is a collection
+of all possible outcomes of an experiment.
+And an event-- we'll denote that with capital letters-- A, B, C,
+things like that-- is any collection of outcomes,
+including individual outcomes, the entire sample
+space, the null set, et cetera.
+So we have some kind of experiment,
+and I'll do some examples in a few minutes
+to add some concreteness to this.
+But we have some experiment, and an event
+is a collection of outcomes of that experiment.
+So if the outcome of the experiment
+is a member of an event, then we say
+that the event has occurred.
+
+And event A is contained in event B, if every outcome in B
+also belongs in A.
+So here, we're just establishing a bunch
+of terminology and definitions.
+And as you have probably gathered,
+these things that I'm defining are sets.
+And so we're going to use many of the same definitions
+and results from set theory in probability theory,
+because we're setting everything out,
+or the mathematical foundation is the one from set theory.
+So all the results from set theory
+are going to apply-- the associative, communicative,
+distributive properties, et cetera.
+And here, I'm just going to post some useful results,
+without much discussion of them.
+If you've done some set theory, some probability theory,
+these things should be pretty familiar to you.
+If an event A is contained in another event,
+B, then the union of those two events is equal to event B.
+
+I should point out a couple of notes about notation.
+So the sign that looks kind of like a C is how we indicate
+contained in.
+And that piece of notation is straight from set theory.
+
+And this capital U kind of thing is how we indicate union--
+and again, that notation is straight from set theory.
+
+The second useful result, if A is contained in B,
+and B is contained in A, then the events A and B are equal.
+
+And if A is contained in B, then AB is equal to A.
+Now here is actually one place where
+the notation between set theory and probability theory
+deviates a little bit.
+Oh, actually, let me skip ahead.
+In set theory, typically we indicate the intersection
+between two sets with a symbol that looks like this.
+And in probability, we usually just leave that out.
+So instead of talking about-- or writing-- the intersection
+of AB like this, we usually just write the intersection
+of AB this way.
+And I'll follow that convention most of the time--
+just leave out the intersection symbol.
+
+And let's see, I'll go back for a second.
+And then finally, the union between A and A complement
+is equal to the sample space.
+So again, these are mostly definitions
+taken straight from set theory.
+You can check standard set theory references
+if you need a little refresher, but for the most part,
+we're going to rely on the apparatus of set theory
+initially.
+
+OK, two other important definitions
+where probability theory uses slightly different terminology
+than set theory is the following two.
+So we say that A and B are mutually exclusive, if they
+have no outcomes in common.
+So we have two events, and if they don't share any outcomes,
+then we say they're mutually exclusive.
+We also sometimes say they're disjoint, and in set theory
+we'll typically talk about them being disjoint.
+In probability theory, you use the term mutually exclusive
+more commonly.
+A and B, events A and B are exhaustive
+if their union is equal to the entire sample space.
+And again, in set theory, we'll typically
+use the term complementary instead of exhaustive,
+and in probability theory we'll usually use exhaustive.
+They mean the same thing.
+So oftentimes we'll talk about-- and we'll
+talk about later today-- groups of events that are mutually
+exclusive and exhaustive.
+And that just means that their union
+is equal to the sample space, but they
+have no events in common.
+And another term for that is a partition--
+they form a partition of the sample space.
